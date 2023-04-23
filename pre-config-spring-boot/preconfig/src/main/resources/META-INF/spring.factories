@@ -1,0 +1,1 @@
+org.springframework.boot.env.EnvironmentPostProcessor=com.thieu.preconfig.pre_config.CustomEnvironmentPostProcessor
