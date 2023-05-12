@@ -1,0 +1,206 @@
+<configuration>
+
+    <property name="PATH_LOG" value="logs"/>
+    <property name="APP_LOG" value="app"/>
+
+    <property name="FATAL" value="fatal"/>
+    <property name="ERROR" value="error"/>
+    <property name="WARN" value="warn"/>
+    <property name="INFO" value="info"/>
+    <property name="DEBUG" value="debug"/>
+    <property name="TRACE" value="trace"/>
+
+
+    <springProperty name="spring.application.name" source="spring.application.name"/>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE-APP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}.%d{yyyy-MM-dd-HH-mm}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-FATAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${FATAL}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${FATAL}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>FATAL</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${ERROR}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${ERROR}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${WARN}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${WARN}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${INFO}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${INFO}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${DEBUG}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${DEBUG}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+
+    <appender name="FILE-APP-TRACE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${PATH_LOG}/${spring.application.name}/${APP_LOG}-${TRACE}.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${PATH_LOG}/${spring.application.name}/archived/${APP_LOG}-${TRACE}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- each archived file, size max 10MB -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- total size of all archive files, if total size > 10GB, it will delete old archived file -->
+            <totalSizeCap>10GB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>60</maxHistory>
+        </rollingPolicy>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>TRACE</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%d{"yyyy/MM/dd HH:mm:ss:SSS"} [%p] [${spring.application.name}] %msg [%C.%M\(%L\)] %n</pattern>
+        </encoder>
+    </appender>
+
+
+    <logger name="com.thieu.logback" level="debug" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-APP"/>
+        <appender-ref ref="FILE-APP-FATAL"/>
+        <appender-ref ref="FILE-APP-ERROR"/>
+        <appender-ref ref="FILE-APP-WARN"/>
+        <appender-ref ref="FILE-APP-INFO"/>
+        <appender-ref ref="FILE-APP-DEBUG"/>
+        <appender-ref ref="FILE-APP-TRACE"/>
+    </logger>
+
+
+    <root level="info">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE-APP"/>
+        <appender-ref ref="FILE-APP-FATAL"/>
+        <appender-ref ref="FILE-APP-ERROR"/>
+        <appender-ref ref="FILE-APP-WARN"/>
+        <appender-ref ref="FILE-APP-INFO"/>
+    </root>
+
+</configuration>
