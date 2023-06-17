@@ -5,3 +5,4 @@
 - handle Exception using @ControllerAdvice
 2. Pre-config-spring-boot : add pre-config properties  before load application.properties
 3. Logback project : Config log - slf4j - logback with spring boot 3.x => log pattern, console, file
+4. Async-Service : async-rest API Spring

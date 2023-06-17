@@ -36,7 +36,7 @@ public class MyController {
         return ResponseEntity.ok(employee);
     }
 
-    @GetMapping
+    @GetMapping("/123")
     public ResponseEntity<Employee> helloGet() {
         log.info("GET - function - helloGet");
         return ResponseEntity.ok(Employee.builder().msg("sever hello").build());
