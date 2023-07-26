@@ -1,5 +1,6 @@
 package com.thieu.async.controller;
 
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,8 @@ public class AsyncController {
 
 	@RequestMapping(value = "/test-async", method = RequestMethod.GET)
 	public Object testAsync() {
+		int timeout = (int)(Math.random() * 6 + 1);
+		timeout = timeout % 2 == 0 ? timeout + 10 : timeout;
 		try {
 			log.info("testAsynch Start");
 			CompletableFuture<EmployeeAddresses> employeeAddress = service.getEmployeeAddress();
@@ -41,13 +44,14 @@ public class AsyncController {
 //			log.info("EmployeeName--> " + employeeName.get());
 //			log.info("EmployeePhone--> " + employeePhone.get());
 
+
 			// Wait 3 seconds
-			EmployeeAddresses empDressData = employeeAddress.get(3000, TimeUnit.MILLISECONDS);
+			EmployeeAddresses empDressData = employeeAddress.get(timeout * 1000, TimeUnit.MILLISECONDS);
 			log.info("EmployeeAddress--> " + empDressData);
 			return empDressData;
 		}catch (Exception ex){
-			log.error(">> {}", ex.toString());
+			log.error(">> {}, timeout = {}", ex.toString(), timeout);
 		}
-		return null;
+		return "timeout : " + timeout;
 	}
 }
